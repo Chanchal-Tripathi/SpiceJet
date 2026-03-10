@@ -88,21 +88,21 @@ public class SpiceJetAutomation {
         // Click on From field to open dropdown
         System.out.println("Step 3: Selecting Delhi as origin and Bangalore as destination...");
 
-/System.out.println("Step 3: Selecting Delhi as origin and Bangalore as destination...");
+
 
 // Initialize the Actions class to simulate keyboard strokes
         Actions actions = new Actions(driver);
 
 // 1. Click the main Origin container to open the dropdown and activate the cursor
-        WebElement originContainer = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@data-testid='to-testID-origin']")));
-        originContainer.click();
+       // WebElement originContainer = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[text()='From']")));
+        //originContainer.click();
 
 // 2. Type "Delhi" directly into whatever field just became active
-        actions.sendKeys("Delhi").perform();
+        //actions.sendKeys("Delhi").perform();
 
 // 3. Wait for the auto-suggest dropdown and click Delhi (DEL)
-        WebElement originCity = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[text()='DEL']")));
-        originCity.click();
+       // WebElement originCity = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[text()='DEL']")));
+       // originCity.click();
 
 // 4. Click the Destination container
         WebElement destContainer = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@data-testid='to-testID-destination']")));
@@ -112,7 +112,12 @@ public class SpiceJetAutomation {
         actions.sendKeys("Bengaluru").perform();
 
 // 6. Wait for the auto-suggest dropdown and click Bangalore (BLR)
-        WebElement destCity = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[text()='BLR']")));
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        WebElement destCity = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[contains(text(),'Bengaluru')]")));
         destCity.click();
     }
     private static void selectNextDate(WebDriver driver, WebDriverWait wait) {
